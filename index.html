@@ -11,13 +11,15 @@
       <a-sky color="#000000"></a-sky>
       <a-light type="ambient" color="#222"></a-light>
       <a-light type="point" intensity="1" position="0 4 -5" color="#ff0000"></a-light>
+
       <!-- Camera and Cursor -->
       <a-entity camera look-controls position="0 1.6 5">
         <a-entity
           position="0 -0.5 -1"
           geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
           material="color: white; shader: flat"
-          cursor="fuse: true; fuseTimeout: 1500">
+          cursor="rayOrigin: mouse; fuse: true; fuseTimeout: 1500"
+          raycaster="objects: .trigger">
         </a-entity>
       </a-entity>
 
@@ -40,7 +42,6 @@
           dur="700"
           easing="easeOutCubic"
           begin="show-eagle"></a-animation>
-     
       </a-entity>
 
       <!-- Jump Scare Trigger -->
@@ -48,7 +49,9 @@
         geometry="primitive: box; height: 2; width: 2; depth: 2"
         material="opacity: 0; transparent: true"
         position="0 1.5 -2"
-        event-set__mouseenter="_event: mouseenter; _target: #eagle; visible: true; _target: #eagle; event: show-eagle"
+        class="trigger"
+        event-set__mouseenter="_event: mouseenter; _target: #eagle; visible: true"
+        event-set__mouseenter__animation="_event: mouseenter; _target: #eagle; event: show-eagle">
       </a-entity>
     </a-scene>
   </body>
